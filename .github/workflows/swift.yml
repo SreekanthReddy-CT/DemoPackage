@@ -1,0 +1,39 @@
+name: Repository Dispatch 'on_design_system_update'
+
+on: push
+#   repository_dispatch:
+#     types: [on_design_system_update]
+
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@v3
+  
+      - name: Set Xcode version
+        run: |
+          ls -l /Applications | grep 'Xcode'
+          sudo xcode-select -s /Applications/Xcode_13.4.app
+      
+      # Delete Derived Data folder to clear the cached package version.
+      # NOTE: Package version rule is based on Major release.
+      # w.r.f: step name 'Update Swift package and Run unit test'
+      - name: Delete Derived Data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData/
+        
+
+      # Delete Package.resolved file.
+      # 'Derived Data' and 'Package.resolved' won't let the package to update
+      # to the latest version while executing package update from terminal.
+      # Always Cached data will be rendered. Hence deleting 'Derived Data' and 'Package.resolved'.
+      # w.r.f: step name 'Update Swift package and Run unit test'
+      - name: Delete Package.resolved
+        run: rm -rf ~/DemoPackage.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+          
+      
+      - name: Update Swift package and Run unit test
+        run: |
+          xcodebuild -scheme DemoPackage test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.5'
+          
