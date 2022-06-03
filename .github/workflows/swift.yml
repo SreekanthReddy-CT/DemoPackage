@@ -1,8 +1,8 @@
 name: Repository Dispatch 'on_design_system_update'
 
-on: push
-#   repository_dispatch:
-#     types: [on_design_system_update]
+on:
+  repository_dispatch:
+    types: [on_design_system_update]
 
 jobs:
   build:
