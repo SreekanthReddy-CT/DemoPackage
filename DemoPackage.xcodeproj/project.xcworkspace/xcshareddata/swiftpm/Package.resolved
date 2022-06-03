@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "packagea",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/YMLSreekanth/PackageA.git",
+      "state" : {
+        "revision" : "91d3b344b9c1a55f9aec43589e64d1c81ace182c",
+        "version" : "0.0.5"
+      }
+    },
+    {
+      "identity" : "packageb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/YMLSreekanth/PackageB.git",
+      "state" : {
+        "revision" : "de7c9564ae8e9b3ea358cc97f475cbe37a0fbba3",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}
